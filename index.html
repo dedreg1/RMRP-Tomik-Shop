@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RMRP Tomik Shop</title>
+    <link rel="icon" href="assets/avatar.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-accent="lime">
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="RMRP Tomik Shop">
+        <span class="avatar-mark" aria-hidden="true"><span>T</span></span>
+        <span>
+          <strong>RMRP Tomik Shop</strong>
+          <small>RMRP Арбат</small>
+        </span>
+      </a>
+
+      <nav class="nav" aria-label="Навигация">
+        <a class="active" href="#catalog">Каталог</a>
+        <a href="#contact">Связь</a>
+        <button id="adminOpen" type="button">Админ</button>
+      </nav>
+
+      <div class="color-panel" aria-label="Цвет акцента">
+        <button class="color-dot lime active" type="button" data-accent-choice="lime" aria-label="Лайм"></button>
+        <button class="color-dot amber" type="button" data-accent-choice="amber" aria-label="Золото"></button>
+        <button class="color-dot cyan" type="button" data-accent-choice="cyan" aria-label="Голубой"></button>
+      </div>
+
+      <button class="music-toggle" id="musicToggle" type="button">Музыка: выкл</button>
+      <button class="discord-pill" id="copyDiscordTop" type="button">reva_ecstasy</button>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="scene" aria-hidden="true">
+          <span class="scan scan-a"></span>
+          <span class="scan scan-b"></span>
+          <span class="tower tower-a"></span>
+          <span class="tower tower-b"></span>
+          <span class="tower tower-c"></span>
+          <span class="arc arc-a"></span>
+          <span class="arc arc-b"></span>
+        </div>
+
+        <div class="server-line">
+          <span>Сервер</span>
+          <strong>Арбат</strong>
+          <i></i>
+          <span>Каталог активен</span>
+          <time id="clock">--:--:--</time>
+        </div>
+
+        <div class="hero-grid">
+          <div class="hero-content">
+            <p class="label">Панель магазина</p>
+            <h1>RMRP Tomik Shop</h1>
+            <p>
+              Услуги, помощь, товары и быстрый контакт для игроков RMRP Арбат.
+              Для заказа напиши в Discord: <strong>reva_ecstasy</strong>.
+            </p>
+            <div class="hero-actions">
+              <a class="primary-link" href="#catalog">Открыть каталог</a>
+              <button class="secondary-link" id="copyDiscordHero" type="button">Скопировать Discord</button>
+            </div>
+          </div>
+
+          <aside class="status-card" id="contact">
+            <span class="avatar-mark large" aria-hidden="true"><span>T</span></span>
+            <p>Связь для заказа</p>
+            <strong>reva_ecstasy</strong>
+            <small>Работаю 10:00-22:00</small>
+            <button id="copyDiscordCard" type="button">Скопировать ник</button>
+          </aside>
+        </div>
+      </section>
+
+      <section class="catalog-section" id="catalog">
+        <div class="section-title">
+          <p class="label">Доступные позиции</p>
+          <h2>Каталог</h2>
+        </div>
+        <div class="product-grid" id="productGrid"></div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-brand">
+        <span class="avatar-mark" aria-hidden="true"><span>T</span></span>
+        <div>
+          <strong>RMRP Tomik Shop</strong>
+          <p>Личная витрина услуг и товаров для игроков RMRP Арбат.</p>
+        </div>
+      </div>
+
+      <div class="footer-info">
+        <div>
+          <span>Discord</span>
+          <button id="copyDiscordFooter" type="button">reva_ecstasy</button>
+        </div>
+        <div>
+          <span>Время работы</span>
+          <strong>10:00-22:00</strong>
+        </div>
+        <div>
+          <span>Заказы</span>
+          <strong>Писать в Discord</strong>
+        </div>
+      </div>
+    </footer>
+
+    <div class="modal" id="loginModal" hidden>
+      <div class="modal-backdrop" data-close-modal></div>
+      <form class="modal-card auth-card" id="loginForm">
+        <div class="modal-head">
+          <div>
+            <p class="label">Доступ владельца</p>
+            <h3>Вход админа</h3>
+          </div>
+          <button class="icon-btn" type="button" data-close-modal>x</button>
+        </div>
+        <label>
+          Логин
+          <input id="loginName" autocomplete="username" required />
+        </label>
+        <label>
+          Пароль
+          <input id="loginPassword" autocomplete="current-password" required type="password" />
+        </label>
+        <button class="primary-btn" type="submit">Войти</button>
+      </form>
+    </div>
+
+    <div class="modal" id="editorModal" hidden>
+      <div class="modal-backdrop" data-close-modal></div>
+      <div class="modal-card editor-card">
+        <div class="modal-head">
+          <div>
+            <p class="label">Личный редактор</p>
+            <h3 id="adminName">Админ</h3>
+          </div>
+          <div class="modal-actions">
+            <button class="ghost-btn" id="logoutBtn" type="button">Выйти</button>
+            <button class="icon-btn" type="button" data-close-modal>x</button>
+          </div>
+        </div>
+
+        <div class="manager-layout">
+          <form class="product-form" id="productForm">
+            <input type="hidden" id="productId" />
+
+            <label>
+              Название
+              <input id="titleInput" maxlength="70" required placeholder="Например: Маршрут заработка" />
+            </label>
+
+            <label>
+              Категория
+              <input id="categoryInput" maxlength="32" required placeholder="Гайды, Авто, Товары" />
+            </label>
+
+            <div class="form-row">
+              <label>
+                Цена
+                <input id="priceInput" required type="text" placeholder="Например: 6kk" />
+              </label>
+
+              <label>
+                Статус
+                <select id="statusInput">
+                  <option value="В наличии">В наличии</option>
+                  <option value="Под заказ">Под заказ</option>
+                  <option value="Скоро">Скоро</option>
+                </select>
+              </label>
+            </div>
+
+            <label>
+              Описание
+              <textarea id="descriptionInput" maxlength="280" required rows="5" placeholder="Коротко объясни, что получает игрок"></textarea>
+            </label>
+
+            <div class="form-actions">
+              <button class="primary-btn" type="submit">Сохранить</button>
+              <button class="ghost-btn" id="resetForm" type="button">Новый товар</button>
+            </div>
+          </form>
+
+          <div class="admin-list">
+            <div class="admin-head">
+              <strong>Позиции</strong>
+              <span id="productCount">0</span>
+            </div>
+            <div id="adminProducts"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="app.js"></script>
+  </body>
+</html>
