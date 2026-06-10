@@ -823,6 +823,35 @@ textarea:focus {
   padding: 16px;
 }
 
+.github-tools {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 12px;
+  padding: 12px;
+  border: 1px solid rgba(var(--accent-rgb), 0.2);
+  border-radius: 16px;
+  background: rgba(var(--accent-rgb), 0.06);
+}
+
+.github-tools small {
+  grid-column: 1 / -1;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.file-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.file-btn input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
 .admin-head {
   margin-bottom: 12px;
 }
@@ -971,6 +1000,10 @@ textarea:focus {
   }
 
   .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .github-tools {
     grid-template-columns: 1fr;
   }
 }
